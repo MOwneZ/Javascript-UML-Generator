@@ -1,4 +1,5 @@
-from model import file_reader, file_selector
+from model.file_reader import FileReader
+from model.file_selector import FileSelect
 
-TheFileReader = file_reader()
-TheFIleSelector = file_selector()
+TheFileReader = FileReader()
+TheFileSelector = FileSelect()
