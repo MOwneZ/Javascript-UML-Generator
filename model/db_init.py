@@ -5,5 +5,8 @@ mydb = mysql.connector.connect(
     user='root'
 )
 
-mycursor = mydb.cursor()
-mycursor.execute("CREATE DATABASE processedfiles")
+try:
+    my_cursor = mydb.cursor()
+    my_cursor.execute("CREATE DATABASE processedfiles") ##currently placeholder!
+except mysql.connector.Error as err:
+    print("error with database: {}".format(err))
