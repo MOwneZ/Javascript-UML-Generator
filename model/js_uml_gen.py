@@ -1,11 +1,10 @@
 import re
 import ast
 
-#   '(\S+)[(].*[)].*{'
 
 class JavaScriptReader:
-    def __init__(self, raw_file):
-        self.raw_file = raw_file
+    def __init__(self):
+        self.raw_file = ""
         self.classes = []
         self.functions = []
         self.string = ""
