@@ -7,6 +7,6 @@ mydb = mysql.connector.connect(
 
 try:
     my_cursor = mydb.cursor()
-    my_cursor.execute("CREATE DATABASE processedfiles") ##currently placeholder!
+    my_cursor.execute("CREATE DATABASE processedfiles")
 except mysql.connector.Error as err:
     print("error with database: {}".format(err))

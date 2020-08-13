@@ -1,11 +1,10 @@
 from model.file_reader import FileReader
-from model.file_selector import FileSelect
 from model.js_uml_gen import JavaScriptReader
-import cmd
-import os
+from cmd import Cmd
+from os import path
 
 
-class View(cmd.Cmd):
+class View(Cmd):
 
     def __init__(self):
         super().__init__()
@@ -21,13 +20,11 @@ class View(cmd.Cmd):
         self.selected_input_Dir = False
         self.selected_output_dir = False
         self.file_reader = FileReader()
-        self.file_selector = FileSelect()
         self.js_reader = JavaScriptReader()
 
-    # allows the user to set their name.
     def do_set_name(self, arg):
         """This option allows to set your name, which can be added to the produced graphical documents. Type the
-        command, followed by your name. Will accept all. """
+        command, followed by your name. Will accept all."""
         if arg != "":
             self.name = arg
             print(str.format("Name set to {}!", self.name))
@@ -41,7 +38,7 @@ class View(cmd.Cmd):
 
     def do_set_input_dir(self, arg):
         """Type this command, followed by either 'folder' 'or file', then a valid directory, to choose the js file(s)
-        to be turned into a diagram. """
+        to be turned into a diagram."""
         if arg == "folder":
             print("Please enter the folder directory of the files desired.")
             folder_dir = input()
@@ -61,7 +58,6 @@ class View(cmd.Cmd):
         else:
             print("Invalid syntax. Please type the command followed by 'folder' or 'file'.")
 
-
     def do_set_output_dir(self, arg):
         """Type this command, followed by a valid directory, to choose the output of the diagram(s)."""
         if not self.selected_type:
@@ -73,11 +69,9 @@ class View(cmd.Cmd):
             else:
                 print("Invalid directory. Please try again.")
 
-    # sets the desired file type for the output document
     def do_set_filetype(self, arg):
         """Use this function to set desired file type for the output document. Type the command followed by either
         -jpg or -j for jpg, and -p or -png for png."""
-        # setting the possible arguments for setting the file type
         valid_jpg = ["jpg", "-jpg", "-j"]
         valid_png = ["png", "-png", "-p"]
         arg = str.lower(arg)
@@ -93,7 +87,6 @@ class View(cmd.Cmd):
             print("incorrect file type. Please type the command followed by either -jpg or -j for jpg, and -p or -png "
                   "for png.")
 
-    # function to provide instructions to users as to how to use the program.
     def do_instructions(self, arg):
         """Provides instructions for using the program. Complete commands in this order."""
         print("To start, you can choose to select a name. Example: set_name Loufeng *OPTIONAL STEP*")
@@ -104,24 +97,21 @@ class View(cmd.Cmd):
         print("Next, select your desired file type. Example: set_filetype -jpg *NECESSARY STEP*")
         print("Finally, you can make the graphical document. Example: create_uml *NECESSARY STEP*")
 
-    # starts the class
     def start(self):
+        """Simple function which starts the program."""
         self.cmdloop()
 
-    # checks the output directory provided - returns true if it's a valid directory, and false if it isn't.
-    def check_output_dir(self, path):
-        if os.path.isdir(path):
+    def check_output_dir(self, dirpath):
+        """checks the output directory provided - returns true if it's a valid directory, and false if it isn't."""
+        if path.isdir(dirpath):
             return True
 
-    # checks the input directory to ensure it's a folder. returns true if valid, false if not.
-    def check_folder_input_dir(self, path):
-        if os.path.isdir(path):
+    def check_folder_input_dir(self, dirpath):
+        """checks the input directory to ensure it's a folder. returns true if valid, false if not."""
+        if path.isdir(dirpath):
             return True
 
-    # checks the input directory to ensure it's a single file. returns true if valid, false if not.
-    def check_file_input_dir(self, path):
-        if os.path.isfile(path):
+    def check_file_input_dir(self, dirpath):
+        """checks the input directory to ensure it's a single file. returns true if valid, false if not."""
+        if path.isfile(dirpath):
             return True
-
-TheView = View()
-TheView.start()
