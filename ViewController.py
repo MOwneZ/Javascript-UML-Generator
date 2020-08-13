@@ -1,5 +1,6 @@
 from model.file_reader import FileReader
 from model.js_uml_gen import JavaScriptReader
+from model.directory_reader import DirectoryReader
 from cmd import Cmd
 from os import path
 
@@ -9,7 +10,7 @@ class View(Cmd):
     def __init__(self):
         super().__init__()
         self.intro = "\nwelcome to this cmd. type help or ? for a list of commands.\n" \
-                     "Some commands require others to be completed first, if lost use the help menu."
+                     "Some commands require others to be completed first. If lost, use the help menu."
         self.prompt = "==>"
         self.name = ""
         self.fileType = ""
@@ -20,6 +21,7 @@ class View(Cmd):
         self.selected_input_Dir = False
         self.selected_output_dir = False
         self.file_reader = FileReader()
+        self.dir_reader = DirectoryReader()
         self.js_reader = JavaScriptReader()
 
     def do_set_name(self, arg):
@@ -29,7 +31,7 @@ class View(Cmd):
             self.name = arg
             print(str.format("Name set to {}!", self.name))
         else:
-            print("Please provide a name! You do not have to do this step if you do not want to.")
+            print("Please provide a name! You do not have to do this step if you do not want to. It's ok, really.")
 
     def do_exit(self, arg):
         """This command closes the command line."""
@@ -41,20 +43,21 @@ class View(Cmd):
         to be turned into a diagram."""
         if arg == "folder":
             print("Please enter the folder directory of the files desired.")
-            folder_dir = input()
-            if self.check_folder_input_dir(folder_dir):
-                self.input_folder_dir = folder_dir
-                print(str.format("Folder has been set to {}"), self.input_folder_dir)
+            folder_dir = input().replace("\\","/")
+            if self.dir_reader.is_valid_dir(folder_dir):
+                self.dir_reader.set_directory(folder_dir)
+                print(str(self.dir_reader.all_my_file_dirs))
+                print("Folder has been set to " + folder_dir)
             else:
-                print("invalid directory. Please try again.")
-        if arg == "file":
+                print("invalid directory! Please try again.")
+        elif arg == "file":
             print("Please enter the directory of the file desired.")
-            file_dir = input()
-            if self.check_file_input_dir(file_dir):
+            file_dir = input().replace("\\","/")
+            if self.check_file_input_dir(file_dir) and self.file_reader.is_valid_file(file_dir):
                 self.input_file_dir = file_dir
-                print(str.format("File has been set to {}"), self.input_file_dir)
+                print("File has been set to " + self.input_file_dir)
             else:
-                print("invalid directory. Please try again.")
+                print("invalid directory or filetype!. Please try again.")
         else:
             print("Invalid syntax. Please type the command followed by 'folder' or 'file'.")
 
@@ -63,11 +66,12 @@ class View(Cmd):
         if not self.selected_type:
             print("Please select a file type first before completing this step.")
         else:
-            if self.check_output_dir(arg):
-                self.output_file_dir = arg
+            output_dir = arg.replace("\\","/")
+            if self.check_output_dir(output_dir):
+                self.output_file_dir = output_dir
                 print(str.format("Output directory set to [{}].", self.output_file_dir))
             else:
-                print("Invalid directory. Please try again.")
+                print("Invalid directory/input. Please try again.")
 
     def do_set_filetype(self, arg):
         """Use this function to set desired file type for the output document. Type the command followed by either
@@ -88,7 +92,7 @@ class View(Cmd):
                   "for png.")
 
     def do_instructions(self, arg):
-        """Provides instructions for using the program. Complete commands in this order."""
+        """Provides instructions for using the program. Complete commands in this order for best understanding."""
         print("To start, you can choose to select a name. Example: set_name Loufeng *OPTIONAL STEP*")
         print(str.format("Next, input the directory of the js files you wish to turn into a diagram. Example: "
                          "set_input_dir {} *NECESSARY STEP*", r"C:\Users\Luofeng\Desktop\jsfiles"))
@@ -96,6 +100,13 @@ class View(Cmd):
                          " *NECESSARY STEP*", r"C:\Users\Luofeng\Desktop\umlfiles"))
         print("Next, select your desired file type. Example: set_filetype -jpg *NECESSARY STEP*")
         print("Finally, you can make the graphical document. Example: create_uml *NECESSARY STEP*")
+
+    def do_produce_diagram(self, arg):
+        """This command uses all the information provided so far and will produce a diagram based on input."""
+        if self.selected_type is True and self.selected_output_dir is True and self.selected_input_Dir is True:
+            print("do this")
+        else:
+            print("Not all pre conditions met. Please review the instructions by typing 'instructions' for help.")
 
     def start(self):
         """Simple function which starts the program."""

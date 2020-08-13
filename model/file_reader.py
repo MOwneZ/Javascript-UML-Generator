@@ -1,4 +1,3 @@
-# class for reading js files
 class FileReader:
     def __init__(self):
         self.file_dir = ""
