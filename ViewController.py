@@ -50,6 +50,7 @@ class View(Cmd):
                 print("Folder has been set to " + folder_dir)
             else:
                 print("invalid directory! Please try again.")
+
         elif arg == "file":
             print("Please enter the directory of the file desired.")
             file_dir = input().replace("\\","/")
@@ -58,6 +59,7 @@ class View(Cmd):
                 print("File has been set to " + self.input_file_dir)
             else:
                 print("invalid directory or filetype!. Please try again.")
+
         else:
             print("Invalid syntax. Please type the command followed by 'folder' or 'file'.")
 

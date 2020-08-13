@@ -12,11 +12,12 @@ class DirectoryReader:
         self.__set_file_dirs()
 
     def is_valid_js_dir(self, new_folder_path):
+        """Will return true if the provided directory contains at least 1 javascript file. (.js)"""
         files_to_check = listdir(new_folder_path)
         for file in files_to_check:
-            if not str(file).endswith(".js"):
-                return False
-        return True
+            if str(file).endswith(".js"):
+                return True
+        return False
 
     def is_valid_folder_dir(self, new_folder_path):
         if path.isdir(new_folder_path):
@@ -24,7 +25,8 @@ class DirectoryReader:
 
     def __set_file_dirs(self):
         for file in self.all_my_files:
-            self.all_my_file_dirs.append(str.format("{}/{}", self.folder_dir, file))
+            if str(file).endswith(".js"):
+                self.all_my_file_dirs.append(str.format("{}/{}", self.folder_dir, file))
 
     def get_file_dirs(self):
         return self.all_my_file_dirs
