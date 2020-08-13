@@ -1,5 +1,4 @@
-from os import listdir
-
+from os import listdir, path
 
 class DirectoryReader:
     def __init__(self):
@@ -12,12 +11,16 @@ class DirectoryReader:
         self.all_my_files = listdir(new_folder_path)
         self.__set_file_dirs()
 
-    def is_valid_dir(self, new_folder_path):
+    def is_valid_js_dir(self, new_folder_path):
         files_to_check = listdir(new_folder_path)
         for file in files_to_check:
             if not str(file).endswith(".js"):
                 return False
         return True
+
+    def is_valid_folder_dir(self, new_folder_path):
+        if path.isdir(new_folder_path):
+            return True
 
     def __set_file_dirs(self):
         for file in self.all_my_files:

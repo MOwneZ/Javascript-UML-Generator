@@ -44,7 +44,7 @@ class View(Cmd):
         if arg == "folder":
             print("Please enter the folder directory of the files desired.")
             folder_dir = input().replace("\\","/")
-            if self.dir_reader.is_valid_dir(folder_dir):
+            if self.dir_reader.is_valid_js_dir(folder_dir):
                 self.dir_reader.set_directory(folder_dir)
                 print(str(self.dir_reader.all_my_file_dirs))
                 print("Folder has been set to " + folder_dir)
@@ -53,7 +53,7 @@ class View(Cmd):
         elif arg == "file":
             print("Please enter the directory of the file desired.")
             file_dir = input().replace("\\","/")
-            if self.check_file_input_dir(file_dir) and self.file_reader.is_valid_file(file_dir):
+            if self.file_reader.is_valid_file_dir(file_dir) and self.file_reader.is_valid_file(file_dir):
                 self.input_file_dir = file_dir
                 print("File has been set to " + self.input_file_dir)
             else:
@@ -67,7 +67,7 @@ class View(Cmd):
             print("Please select a file type first before completing this step.")
         else:
             output_dir = arg.replace("\\","/")
-            if self.check_output_dir(output_dir):
+            if self.dir_reader.is_valid_folder_dir(output_dir):
                 self.output_file_dir = output_dir
                 print(str.format("Output directory set to [{}].", self.output_file_dir))
             else:
@@ -111,18 +111,3 @@ class View(Cmd):
     def start(self):
         """Simple function which starts the program."""
         self.cmdloop()
-
-    def check_output_dir(self, dirpath):
-        """checks the output directory provided - returns true if it's a valid directory, and false if it isn't."""
-        if path.isdir(dirpath):
-            return True
-
-    def check_folder_input_dir(self, dirpath):
-        """checks the input directory to ensure it's a folder. returns true if valid, false if not."""
-        if path.isdir(dirpath):
-            return True
-
-    def check_file_input_dir(self, dirpath):
-        """checks the input directory to ensure it's a single file. returns true if valid, false if not."""
-        if path.isfile(dirpath):
-            return True

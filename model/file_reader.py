@@ -1,3 +1,5 @@
+from os import path
+
 class FileReader:
     def __init__(self):
         self.file_dir = ""
@@ -12,6 +14,10 @@ class FileReader:
 
     def is_valid_file(self, new_dir):
         if str(new_dir).endswith(".js"):
+            return True
+
+    def is_valid_file_dir(self, new_dir):
+        if path.isfile(new_dir):
             return True
 
     def set_file_dir(self, new_dir):
