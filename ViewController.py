@@ -2,7 +2,6 @@ from model.file_reader import FileReader
 from model.js_uml_gen import JavaScriptReader
 from model.directory_reader import DirectoryReader
 from cmd import Cmd
-from os import path
 
 
 class View(Cmd):

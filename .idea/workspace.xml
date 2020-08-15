@@ -20,15 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbb46a08-f820-493b-9fa4-a1b1cb579dd6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/testing_files/not_a_js_file.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/testing_files/test_file_1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/testing_files/test_file_2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewController.py" beforeDir="false" afterPath="$PROJECT_DIR$/ViewController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/directory_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/directory_reader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/file_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/file_reader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_directory_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_directory_validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_read_files.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_read_files.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +50,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/anaconda3/python.exe" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -205,6 +198,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="#com.intellij.execution.junit2.states.ComparisonFailureState$DiffDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597360969481" />
+    <state x="679" y="392" key="FileChooserDialogImpl" timestamp="1597365853100">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="679" y="392" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597365853100" />
     <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1597361806368">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -241,9 +238,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="348" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597057648456" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1596497200082">
+    <state x="461" y="165" key="SettingsEditor" timestamp="1597365866890">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1596497200082" />
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597365866890" />
   </component>
 </project>
