@@ -1,5 +1,6 @@
 from os import path
 
+
 class FileReader:
     def __init__(self):
         self.file_dir = ""
