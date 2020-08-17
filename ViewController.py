@@ -1,5 +1,5 @@
 from model.file_reader import FileReader
-from model.js_uml_gen import JavaScriptReader
+from model.js_to_dot import JavaScriptReader
 from model.directory_reader import DirectoryReader
 from cmd import Cmd
 
@@ -14,12 +14,12 @@ class View(Cmd):
                      "lost, use the help menu. "
         self.prompt = "==>"
         self.name = ""
-        self.fileType = ""
+        self.file_type = ""
         self.output_file_dir = ""
         self.input_file_dir = ""
         self.input_folder_dir = ""
         self.selected_type = False
-        self.selected_input_Dir = False
+        self.selected_input_dir = False
         self.selected_output_dir = False
         self.file_reader = FileReader()
         self.dir_reader = DirectoryReader()
@@ -64,7 +64,7 @@ class View(Cmd):
                 self.input_file_dir = file_dir
                 print("File has been set to " + self.input_file_dir)
             else:
-                print("invalid directory or filetype!. Please try again.")
+                print("invalid directory or file type!. Please try again.")
 
         else:
             print(
@@ -94,11 +94,11 @@ class View(Cmd):
         valid_png = ["png", "-png", "-p"]
         arg = str.lower(arg)
         if arg in valid_jpg:
-            self.fileType = "jpg"
+            self.file_type = "jpg"
             self.selected_type = True
             print("set file type to jpg!")
         elif arg in valid_png:
-            self.fileType = "png"
+            self.file_type = "png"
             self.selected_type = True
             print("set file type to png!")
         else:
@@ -134,7 +134,7 @@ class View(Cmd):
         produce a diagram based on input. """
         if self.selected_type is True\
                 and self.selected_output_dir is True\
-                and self.selected_input_Dir is True:
+                and self.selected_input_dir is True:
             print("do this")
         else:
             print(

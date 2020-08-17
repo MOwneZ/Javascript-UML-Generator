@@ -5,13 +5,13 @@ class FileReader:
     def __init__(self):
         self.file_dir = ""
         self.file_contents = ""
-        self.clean_file = ""
+        self.clean_file_contents = ""
 
     def __read_file(self):
         js_file = open(self.file_dir)
         self.file_contents = js_file.readlines()
         for line in self.file_contents:
-            self.clean_file += line.strip("\n")
+            self.clean_file_contents += line.strip("\n")
         js_file.close()
 
     def is_valid_file(self, new_dir):
@@ -28,4 +28,4 @@ class FileReader:
     def get_file_contents(self, new_dir):
         self.__set_file_dir(new_dir)
         self.__read_file()
-        return self.clean_file
+        return self.clean_file_contents
