@@ -11,7 +11,7 @@ class FileReader:
         js_file = open(self.file_dir)
         self.file_contents = js_file.readlines()
         for line in self.file_contents:
-            self.clean_file_contents += line.strip("\n")
+            self.clean_file_contents += line
         js_file.close()
 
     def is_valid_file(self, new_dir):

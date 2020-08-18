@@ -1,37 +1,27 @@
-import re
-import ast
+from esprima import parse
+from nested_lookup import nested_lookup, get_all_keys
 
 
-class JavaScriptReader:
+class JsToDot:
     def __init__(self):
-        self.raw_file = ""
-        self.classes = []
-        self.functions = []
-        self.string = ""
-        self.open_count = int
+        self.js_file = ""
+        self.js_file_parsed = {}
+        self.all_my_functions = []
+        self.all_my_classes = []
+        self.all_my_attributes = []
 
-    def __remove_extras(self):
-        self.raw_file = self.raw_file.replace(" ", "")
-        self.raw_file = self.raw_file.replace("\n", "")
+    def set_js_file(self, new_file):
+        self.js_file = new_file
 
-    def __get_classes(self):
-        node = ast.parse(self.raw_file)
-        self.classes = [n for n in node.body if isinstance(n, ast.ClassDef)]
+    def parse(self):
+        self.js_file_parsed = parse(self.js_file)
 
-    def __get_functions(self):
-        node = ast.parse(self.raw_file)
-        self.functions = [n for n in node.body if isinstance(n, ast.FunctionDef)]
+    def get_parsed(self):
+        for key, value in self.js_file_parsed.items():
+            print(value)
 
-    def get_raw(self):
-        self.__get_classes()
-        self.__get_functions()
-        return self.raw_file
+    def set_classes(self):
+        self.all_my_classes.append(self.js_file_parsed.body.get('type'))
 
-    def __isolate_func(self):
-        for str in self.raw_file:
-            while self.open_count != 0:
-                if str == "{":
-                    self.open_count += 1
-                if str == "}":
-                    self.open_count -= 1
-                self.string += str
+    def get_classes(self):
+        return self.js_file_parsed.body

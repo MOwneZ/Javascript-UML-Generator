@@ -1,5 +1,5 @@
 from model.file_reader import FileReader
-from model.js_to_dot import JavaScriptReader
+from model.js_to_dot import JsToDot
 from model.directory_reader import DirectoryReader
 from cmd import Cmd
 
@@ -12,7 +12,7 @@ class View(Cmd):
                      "commands.\n" \
                      "Some commands require others to be completed first. If "\
                      "lost, use the help menu. "
-        self.prompt = "==>"
+        self.prompt = "==>  "
         self.name = ""
         self.file_type = ""
         self.output_file_dir = ""
@@ -23,7 +23,7 @@ class View(Cmd):
         self.selected_output_dir = False
         self.file_reader = FileReader()
         self.dir_reader = DirectoryReader()
-        self.js_reader = JavaScriptReader()
+        self.js_reader = JsToDot()
 
     def do_set_name(self, arg):
         """This option allows to set your name, which can be added to the
@@ -132,14 +132,25 @@ class View(Cmd):
     def do_produce_diagram(self, arg):
         """This command uses all the information provided so far and will
         produce a diagram based on input. """
-        if self.selected_type is True\
-                and self.selected_output_dir is True\
-                and self.selected_input_dir is True:
+        if self.selected_type\
+                and self.selected_output_dir\
+                and self.selected_input_dir:
             print("do this")
         else:
             print(
                 "Not all pre conditions met. Please review the instructions "
                 "by typing 'instructions' for help.")
+
+    def do_test(self, arg):
+        file_dir = "C:\\Users\\Max\\Documents\\GitHub\\Javascript-UML-Generator\\jsfiles\\Match.js"
+        file = self.file_reader.get_file_contents(file_dir)
+        self.js_reader.set_js_file(file)
+        self.js_reader.parse()
+        self.js_reader.get_parsed()
+        #self.js_reader.set_classes()
+        #print(self.js_reader.get_parsed())
+        #print(self.js_reader.get_keys())
+        #print(self.js_reader.get_classes())
 
     def start(self):
         """Simple function which starts the program."""
