@@ -1,37 +1,36 @@
-import re
-import ast
+from esprima import parse
 
 
-class JavaScriptReader:
+class JsToDot:
     def __init__(self):
-        self.raw_file = ""
-        self.classes = []
-        self.functions = []
-        self.string = ""
-        self.open_count = int
+        self.js_file = ""
+        self.js_file_parsed = {}
+        self.all_my_classes = []
 
-    def __remove_extras(self):
-        self.raw_file = self.raw_file.replace(" ", "")
-        self.raw_file = self.raw_file.replace("\n", "")
+    def set_js_file(self, new_file):
+        self.js_file = new_file
 
-    def __get_classes(self):
-        node = ast.parse(self.raw_file)
-        self.classes = [n for n in node.body if isinstance(n, ast.ClassDef)]
+    def parse(self):
+        self.js_file_parsed = parse(self.js_file)
 
-    def __get_functions(self):
-        node = ast.parse(self.raw_file)
-        self.functions = [n for n in node.body if isinstance(n, ast.FunctionDef)]
+    def set_classes(self):
+        for key, value in self.js_file_parsed.items():
+            if key is "body":
+                for aValue in value:
+                    self.all_my_classes.append(aValue.id.name)
+                    self.set_class_methods(aValue.body.body)
+                    self.set_class_attributes(aValue.body.body)
 
-    def get_raw(self):
-        self.__get_classes()
-        self.__get_functions()
-        return self.raw_file
+    def set_class_methods(self, new_class_body):
+        for value in new_class_body:
+            if value.type is "MethodDefinition":
+                print(value.key.name)
 
-    def __isolate_func(self):
-        for str in self.raw_file:
-            while self.open_count != 0:
-                if str == "{":
-                    self.open_count += 1
-                if str == "}":
-                    self.open_count -= 1
-                self.string += str
+    def set_class_attributes(self, new_class_body):
+        for value in new_class_body:
+            if value.type is "MethodDefinition" and value.key.name == "constructor":
+                for aValue in value.value.body.body:
+                    print(aValue)
+
+    def get_dict(self):
+        return self.js_file_parsed
