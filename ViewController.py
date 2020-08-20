@@ -12,7 +12,7 @@ class View(Cmd):
         super().__init__()
         self.intro = "\nwelcome to this cmd. type help or ? for a list of " \
                      "commands.\n" \
-                     "Some commands require others to be completed first. If " \
+                     "Some commands require others to be completed first. If "\
                      "lost, use the help menu."
         self.prompt = "==>  "
         self.name = ""

@@ -18,7 +18,7 @@ class JsParser:
         for key, value in self.js_file_parsed.items():
             if key == "body":
                 for aValue in value:
-                    single_class = {"name": (self.set_class_name(aValue)),
+                    single_class = {"name": (self.get_class_name(aValue)),
                                     "attributes":
                                         (self.get_class_attributes(
                                             aValue.body.body)),
@@ -27,12 +27,8 @@ class JsParser:
                                             aValue.body.body)}
                     self.add_class(single_class)
 
-    def set_class_name(self, new_value):
+    def get_class_name(self, new_value):
         return new_value.id.name
-
-    def add_class(self, new_class):
-        if new_class not in self.all_my_classes:
-            self.all_my_classes.append(new_class)
 
     def get_class_attributes(self, new_class_body):
         attributes = []
@@ -49,3 +45,7 @@ class JsParser:
             if value.type == "MethodDefinition":
                 methods.append(value.key.name)
         return methods
+
+    def add_class(self, new_class):
+        if new_class not in self.all_my_classes:
+            self.all_my_classes.append(new_class)

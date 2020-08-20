@@ -1,9 +1,9 @@
-import unittest
+from unittest import TestCase
 from model.directory_reader import DirectoryReader
 from os import getcwd
 
 
-class TestValidateDirectory(unittest.TestCase):
+class TestValidateDirectory(TestCase):
 
     def setUp(self):
         self.dir_reader = DirectoryReader()
@@ -24,7 +24,7 @@ class TestValidateDirectory(unittest.TestCase):
     def test_forward_slash_folder_dir(self):
         """Tests to see whether the DirectoryReader class can correctly
         validate a directory with forward slashes. """
-        valid_dir = self.current_dir.replace("\\","/")
+        valid_dir = self.current_dir.replace("\\", "/")
         self.assertTrue(self.dir_reader.is_valid_folder_dir(valid_dir))
 
     def test_mixed_dir(self):
@@ -49,11 +49,11 @@ class TestValidateDirectory(unittest.TestCase):
     def test_select_js_files(self):
         """Tests to see whether the DirectoryReader class can correctly
         select ONLY js files and ignore all others. """
-        valid_dir = str.format("{}/testing_files",
+        valid_dir = str.format("{}/testing_files/dir_tests",
                                self.current_dir).replace("\\", "/")
-        js_file_dirs = [str.format("{}/testing_files/test_file_1.js",
+        js_file_dirs = [str.format("{}/testing_files/dir_tests/test_file_1.js",
                                    self.current_dir).replace("\\", "/"),
-                        str.format("{}/testing_files/test_file_2.js",
+                        str.format("{}/testing_files/dir_tests/test_file_2.js",
                                    self.current_dir).replace("\\", "/")]
         self.dir_reader.set_directory(valid_dir)
         self.assertEqual(self.dir_reader.get_file_dirs(), js_file_dirs)
