@@ -13,8 +13,8 @@ class View(Cmd):
         self.intro = "\nwelcome to this cmd. type help_all for a list of " \
                      "commands,\nor for a specific command type 'help'" \
                      "followed by the command.\n" \
-                     "Some commands require others to be completed first. If "\
-                     "lost, use the help menu."
+                     "Some commands require others to be completed first. If"\
+                     " lost, use the help menu."
         self.prompt = "==>  "
         self.name = ""
         self.file_type = ""
@@ -94,6 +94,7 @@ class View(Cmd):
 
     def do_help_all(self, arg):
         """This command provides a full, detailed list of all the commands."""
+        print("*command*       *Parameters*                  *Instructions*")
         print("set_name        <Luofeng>                     This command sets"
               " the creator name of the document. Type the command, followed"
               "by the desired name.")
@@ -111,13 +112,12 @@ class View(Cmd):
               "output directory has been selected. Type the command followed"
               " by the input directory.")
 
-
     def do_create_uml(self, arg):
         """This command uses all the information provided so far and will
         produce a diagram based on input. """
         directory = arg.replace("\\", "/")
-        if self.dir_reader.is_valid_js_dir(directory)\
-                and self.selected_file_type is True:
+        if self.dir_reader.is_valid_js_dir(directory):
+            # and self.selected_file_type is True:
             for file in listdir(directory):
                 file_dir = directory + "/" + file
                 self.js_reader.set_js_file(
