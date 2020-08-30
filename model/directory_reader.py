@@ -3,13 +3,13 @@ from os import listdir, path
 
 class DirectoryReader:
     def __init__(self):
-        self.all_my_files = []
-        self.all_my_file_dirs = []
-        self.folder_dir = ""
+        self.__all_my_files = []
+        self.__all_my_file_dirs = []
+        self.__folder_dir = ""
 
     def set_directory(self, new_folder_path):
-        self.folder_dir = new_folder_path
-        self.all_my_files = listdir(new_folder_path)
+        self.__folder_dir = new_folder_path
+        self.__all_my_files = listdir(new_folder_path)
         self.__set_file_dirs()
 
     def is_valid_js_dir(self, new_folder_path):
@@ -27,11 +27,11 @@ class DirectoryReader:
             return True
 
     def __set_file_dirs(self):
-        for file in self.all_my_files:
+        for file in self.__all_my_files:
             if str(file).endswith(".js"):
-                self.all_my_file_dirs.append(str.format("{}/{}",
-                                                        self.folder_dir,
-                                                        file))
+                self.__all_my_file_dirs.append(str.format("{}/{}",
+                                                          self.__folder_dir,
+                                                          file))
 
     def get_file_dirs(self):
-        return self.all_my_file_dirs
+        return self.__all_my_file_dirs

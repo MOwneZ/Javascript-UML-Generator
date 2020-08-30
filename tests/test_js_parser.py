@@ -112,7 +112,7 @@ class TestJsParser(TestCase):
         dir = str.format("{}/testing_files/test_four_classes",
                          self.current_dir).replace("\\", "/")
         self.dir_reader.set_directory(dir)
-        for aDir in self.dir_reader.all_my_file_dirs:
+        for aDir in self.dir_reader.get_file_dirs():
             js_file = self.file_reader.get_file_contents(aDir)
             self.js_parser.set_js_file(js_file)
             self.js_parser.parse_js_file()

@@ -3,34 +3,34 @@ from esprima import parse
 
 class JsParser:
     def __init__(self):
-        self.js_file = ""
-        self.js_file_parsed = {}
+        self.__js_file = ""
+        self.__js_file_parsed = {}
         self.all_my_classes = []
 
     def set_js_file(self, new_file):
-        self.js_file = new_file
+        self.__js_file = new_file
 
     def parse_js_file(self):
-        self.js_file_parsed = parse(self.js_file)
-        self.set_classes()
+        self.__js_file_parsed = parse(self.__js_file)
+        self.__set_classes()
 
-    def set_classes(self):
-        for key, value in self.js_file_parsed.items():
+    def __set_classes(self):
+        for key, value in self.__js_file_parsed.items():
             if key == "body":
                 for aValue in value:
-                    single_class = {"name": (self.get_class_name(aValue)),
+                    single_class = {"name": (self.__get_class_name(aValue)),
                                     "attributes":
-                                        (self.get_class_attributes(
+                                        (self.__get_class_attributes(
                                             aValue.body.body)),
                                     "methods":
-                                        self.get_class_methods(
+                                        self.__get_class_methods(
                                             aValue.body.body)}
-                    self.add_class(single_class)
+                    self.__add_class(single_class)
 
-    def get_class_name(self, new_value):
+    def __get_class_name(self, new_value):
         return new_value.id.name
 
-    def get_class_attributes(self, new_class_body):
+    def __get_class_attributes(self, new_class_body):
         attributes = []
         for value in new_class_body:
             if value.type == "MethodDefinition" \
@@ -39,13 +39,13 @@ class JsParser:
                     attributes.append(aValue.expression.left.property.name)
         return attributes
 
-    def get_class_methods(self, new_class_body):
+    def __get_class_methods(self, new_class_body):
         methods = []
         for value in new_class_body:
             if value.type == "MethodDefinition":
                 methods.append(value.key.name)
         return methods
 
-    def add_class(self, new_class):
+    def __add_class(self, new_class):
         if new_class not in self.all_my_classes:
             self.all_my_classes.append(new_class)

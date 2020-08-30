@@ -1,7 +1,6 @@
 from model.file_reader import FileReader
 from model.js_parser import JsParser
 from model.directory_reader import DirectoryReader
-from model.class_to_dot import ClassToDot
 from cmd import Cmd
 from os import listdir
 
@@ -89,8 +88,8 @@ class View(Cmd):
         print(
             str.format("Finally, you can make the graphical document by "
                        "providing an input directory of a file or files."
-                       " Example: create_uml {}*NECESSARY STEP*"),
-            r"C:\Users\Luofeng\Desktop\jsfiles")
+                       " Example: create_uml {}*NECESSARY STEP*",
+                       r"C:\Users\Luofeng\Desktop\jsfiles"))
 
     def do_help_all(self, arg):
         """This command provides a full, detailed list of all the commands."""
@@ -111,13 +110,13 @@ class View(Cmd):
               "output directory has been selected. Type the command followed"
               " by the input directory.")
 
-
     def do_create_uml(self, arg):
         """This command uses all the information provided so far and will
         produce a diagram based on input. """
         directory = arg.replace("\\", "/")
-        if self.dir_reader.is_valid_js_dir(directory)\
-                and self.selected_file_type is True:
+        if self.dir_reader.is_valid_js_dir(directory) \
+                and self.selected_file_type\
+                and self.selected_output_dir is True:
             for file in listdir(directory):
                 file_dir = directory + "/" + file
                 self.js_reader.set_js_file(
